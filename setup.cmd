@@ -11,3 +11,8 @@ echo ------------------------------------------------------------------------
 
 REM installing ANT software
 call ./components/ant.cmd
+
+echo ------------------------------------------------------------------------
+
+REM installing JDK software
+call ./components/jdk.cmd

@@ -32,6 +32,7 @@ IF "%isinstalled%" == "Y" (
 	)
 ) ELSE (
 	echo %msgPrefix%Software not installed
+	echo.
 )
 
 echo %msgPrefix%Copying %APP_NAME% directory from repository
