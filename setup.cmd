@@ -1,10 +1,24 @@
 @echo off
+set CONFIG_FILE=config.properties
+
 set msgPrefix=---
 
+echo %msgPrefix%Loading configurations from %CONFIG_FILE%
 REM Reading configuration properties
-for /F "tokens=*" %%I in (config.properties) do set %%I
+IF EXIST %CONFIG_FILE% ( 
+	for /F "tokens=*" %%I in (%CONFIG_FILE%) do set %%I
+	echo %msgPrefix%Configurations loaded successfully.
+	echo %msgPrefix%Continuing with installation.
+	echo.
+) ELSE (
+	echo %msgPrefix%Unable to locate config.properties file.
+	echo %msgPrefix%Exiting installation
+	call ./install_failure.cmd
+	exit /B 1
+)
 
 REM Create folder structure
+echo %msgPrefix%Creating installation folder [%INSTALLATION_DIR%].
 call mkdir %INSTALLATION_DIR%
 
 REM installing 7-zip software
