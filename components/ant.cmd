@@ -1,12 +1,13 @@
 REM This script will install ANT application 
 set APP_NAME=ANT
 set APP_FOLDER=%ANT_FOLDER%
+set INSTALLER_FILE=%ANT_ZIP%
 
 call ./install_start.cmd %APP_NAME%
 
 echo %msgPrefix%Verifying access to repository location.
-echo %msgPrefix%Accessing location %SOFTWARE_DUMP_DIR%\%APP_FOLDER%.
-IF EXIST %SOFTWARE_DUMP_DIR%\%APP_FOLDER% ( 
+echo %msgPrefix%Accessing location %SOFTWARE_DUMP_DIR%\%APP_FOLDER%\%INSTALLER_FILE%.
+IF EXIST %SOFTWARE_DUMP_DIR%\%APP_FOLDER%\%INSTALLER_FILE% ( 
 	echo %msgPrefix%Success! Continuing with installation.
 	echo.
 ) ELSE ( 
@@ -35,16 +36,24 @@ IF "%isinstalled%" == "Y" (
 	echo.
 )
 
-echo %msgPrefix%Copying %APP_NAME% directory from repository
+echo %msgPrefix%Downloading %APP_NAME% zip file[%SOFTWARE_DUMP_DIR%\%APP_FOLDER%\%INSTALLER_FILE%].
+call mkdir %INSTALLATION_DIR%\%APP_FOLDER%
+call robocopy %SOFTWARE_DUMP_DIR%\%APP_FOLDER% %INSTALLATION_DIR%\ %INSTALLER_FILE% /s /NFL /NDL /nc /ns /np
 
-call robocopy %SOFTWARE_DUMP_DIR%\%APP_FOLDER% %INSTALLATION_DIR%\%APP_FOLDER% /s /NFL /NDL /nc /ns /np
-
-IF %errorlevel% neq 1 (
+echo.
+echo %msgPrefix%Decompressing zip file.
+call %zip_command% -y x %INSTALLATION_DIR%\%INSTALLER_FILE% -o%INSTALLATION_DIR%
+IF %errorlevel% neq 0 (
 	call ./install_failure.cmd %APP_NAME%
-) ELSE (
-	echo %msgPrefix%Setting ANT_HOME to %INSTALLATION_DIR%\%APP_FOLDER%
-	call setx ANT_HOME %INSTALLATION_DIR%\%APP_FOLDER%
-	echo %msgPrefix%Adding %INSTALLATION_DIR%\%APP_FOLDER%\bin folder to PATH variable
-	REM call setx PATH %PATH%;%INSTALLATION_DIR%\%APP_FOLDER%\bin
-	call ./install_success.cmd %APP_NAME%
+	exit /B
 )
+
+echo.
+echo %msgPrefix%Cleanup inprogress.
+call del %INSTALLATION_DIR%\%INSTALLER_FILE% /q
+	
+echo %msgPrefix%Setting ANT_HOME to %INSTALLATION_DIR%\%APP_FOLDER%
+call setx ANT_HOME %INSTALLATION_DIR%\%APP_FOLDER%
+echo %msgPrefix%Adding %INSTALLATION_DIR%\%APP_FOLDER%\bin folder to PATH variable
+REM call setx PATH %PATH%;%INSTALLATION_DIR%\%APP_FOLDER%\bin
+call ./install_success.cmd %APP_NAME%

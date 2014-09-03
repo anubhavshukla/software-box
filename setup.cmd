@@ -11,6 +11,7 @@ REM installing 7-zip software
 IF "%ZEVENZIP_REQUIRED%"=="Y" (
 	call ./components/7zip.cmd
 )
+set zip_command=%INSTALLATION_DIR%\%SEVENZIP_FOLDER%\7z.exe
 
 echo ------------------------------------------------------------------------
 
