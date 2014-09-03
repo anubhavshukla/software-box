@@ -42,17 +42,11 @@ call robocopy %SOFTWARE_DUMP_DIR%\%APP_FOLDER% %INSTALLATION_DIR%\%APP_FOLDER% %
 
 echo.
 echo %msgPrefix%Executing installer %INSTALLATION_DIR%\%APP_FOLDER%\%APP_EXECUTABLE%.
-call %INSTALLATION_DIR%\%APP_FOLDER%\%APP_EXECUTABLE% /s /INSTALLDIRPUBJRE=%INSTALLATION_DIR%\%APP_FOLDER%
+call %INSTALLATION_DIR%\%APP_FOLDER%\%APP_EXECUTABLE% /s INSTALLDIR=%INSTALLATION_DIR%\%APP_FOLDER%
 
-IF %errorlevel% neq 1 (
+IF %errorlevel% neq 0 (
 	call ./install_failure.cmd %APP_NAME%
-) ELSE (
-	echo %msgPrefix%Setting JAVA_HOME to %INSTALLATION_DIR%\%APP_FOLDER%
-	REM call setx ANT_HOME %INSTALLATION_DIR%\%APP_FOLDER%
-	echo %msgPrefix%Adding %INSTALLATION_DIR%\%APP_FOLDER%\bin folder to PATH variable
-	REM call setx PATH %PATH%;%INSTALLATION_DIR%\%APP_FOLDER%\bin
-	echo.
-	echo %msgPrefix%Cleanup inprogress.
-	call del %INSTALLATION_DIR%\%APP_FOLDER%\%APP_EXECUTABLE% /q
-	call ./install_success.cmd %APP_NAME%
+	exit /B 1
 )
+
+call ./install_success.cmd %APP_NAME%
