@@ -1,15 +1,14 @@
-REM This script will install ANT application.
+REM This script will install Eclipse application.
 REM Pre-requisites: 
 REM 1. 7-zip installation to directory specified in config.properties.
 REM Installation steps:
-REM 1. Copy zip archieve of ant from repository.
+REM 1. Copy zip archieve of Eclipse from repository.
 REM 2. Unzip the archieve using 7-zip.
 REM 3. Remove archive.
-REM 4. Set ANT_HOME and add to PATH variable.
 
-set APP_NAME=ANT
-set APP_FOLDER=%ANT_FOLDER%
-set INSTALLER_FILE=%ANT_ZIP%
+set APP_NAME=Eclipse
+set APP_FOLDER=%ECLIPSE_FOLDER%
+set INSTALLER_FILE=%ECLIPSE_ZIP%
 
 call ./install_start.cmd %APP_NAME%
 
@@ -65,11 +64,5 @@ IF %errorlevel% neq 0 (
 echo.
 echo %msgPrefix%Cleanup inprogress.
 call del %INSTALLATION_DIR%\%INSTALLER_FILE% /q
-
-echo.	
-echo %msgPrefix%Setting ANT_HOME to %INSTALLATION_DIR%\%APP_FOLDER%
-call setx ANT_HOME %INSTALLATION_DIR%\%APP_FOLDER%
-echo %msgPrefix%Adding %INSTALLATION_DIR%\%APP_FOLDER%\bin folder to PATH variable
-call setx PATH %PATH%;%INSTALLATION_DIR%\%APP_FOLDER%\bin
 
 call ./install_success.cmd %APP_NAME%

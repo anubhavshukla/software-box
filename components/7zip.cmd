@@ -1,4 +1,6 @@
-REM This script will install 7-zip application 
+REM This script will install 7-zip application.
+REM This performs by copying the 7-zip folder to the installation destination.
+
 set APP_NAME=7-zip
 set APP_FOLDER=%SEVENZIP_FOLDER%
 
@@ -36,11 +38,15 @@ IF "%isinstalled%" == "Y" (
 )
 
 echo %msgPrefix%Copying %APP_NAME% directory from repository
-
 call robocopy %SOFTWARE_DUMP_DIR%\%APP_FOLDER% %INSTALLATION_DIR%\%APP_FOLDER% /s /NFL /NDL /nc /ns /np
 
 IF %errorlevel% neq 1 (
 	call ./install_failure.cmd %APP_NAME%
-) ELSE (
-	call ./install_success.cmd %APP_NAME%
+	exit /B 2
 )
+
+echo.
+echo %msgPrefix%Adding %INSTALLATION_DIR%\%APP_FOLDER% folder to PATH variable
+call setx PATH %PATH%;%INSTALLATION_DIR%\%APP_FOLDER%
+
+call ./install_success.cmd %APP_NAME%
