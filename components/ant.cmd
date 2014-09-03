@@ -5,6 +5,12 @@ set INSTALLER_FILE=%ANT_ZIP%
 
 call ./install_start.cmd %APP_NAME%
 
+call ./components/check7zip.cmd
+IF %errorlevel% neq 0 (
+	call ./install_failure.cmd %APP_NAME%
+	exit /B
+)
+
 echo %msgPrefix%Verifying access to repository location.
 echo %msgPrefix%Accessing location %SOFTWARE_DUMP_DIR%\%APP_FOLDER%\%INSTALLER_FILE%.
 IF EXIST %SOFTWARE_DUMP_DIR%\%APP_FOLDER%\%INSTALLER_FILE% ( 
