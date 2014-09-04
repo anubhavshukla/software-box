@@ -10,7 +10,7 @@ echo Dumping old PATH variable value to oldpath.txt
 echo %PATH% >> oldpath.txt
 call set PATH_SEGMENT=
 
-REM Setting 7-zip environment variables
+:: Setting 7-zip environment variables
 echo.
 echo Set 7-zip environment variables
 echo --------------------------------------------------------
@@ -29,7 +29,7 @@ IF "%SEVENZIP_REQUIRED%"=="Y" (
 )
 echo --------------------------------------------------------
 
-REM Setting ANT environment variables
+:: Setting ANT environment variables
 echo.
 echo Set ANT environment variables
 echo --------------------------------------------------------

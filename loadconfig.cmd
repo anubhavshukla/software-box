@@ -3,7 +3,7 @@ set CONFIG_FILE=config.properties
 set msgPrefix=---
 
 echo %msgPrefix%Loading configurations from %CONFIG_FILE%
-REM Reading configuration properties
+:: Reading configuration properties
 IF EXIST %CONFIG_FILE% ( 
 	for /F "tokens=*" %%I in (%CONFIG_FILE%) do set %%I
 	echo %msgPrefix%Configurations loaded successfully.

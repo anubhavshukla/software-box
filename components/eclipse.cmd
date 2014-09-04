@@ -1,10 +1,10 @@
-REM This script will install Eclipse application.
-REM Pre-requisites: 
-REM 1. 7-zip installation to directory specified in config.properties.
-REM Installation steps:
-REM 1. Copy zip archieve of Eclipse from repository.
-REM 2. Unzip the archieve using 7-zip.
-REM 3. Remove archive.
+:: This script will install Eclipse application.
+:: Pre-requisites: 
+:: 1. 7-zip installation to directory specified in config.properties.
+:: Installation steps:
+:: 1. Copy zip archieve of Eclipse from repository.
+:: 2. Unzip the archieve using 7-zip.
+:: 3. Remove archive.
 
 set APP_NAME=Eclipse
 set APP_FOLDER=%ECLIPSE_FOLDER%

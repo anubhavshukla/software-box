@@ -1,5 +1,5 @@
-REM This script will install 7-zip application.
-REM This performs by copying the 7-zip folder to the installation destination.
+:: This script will install 7-zip application.
+:: This performs by copying the 7-zip folder to the installation destination.
 
 set APP_NAME=7-zip
 set APP_FOLDER=%SEVENZIP_FOLDER%

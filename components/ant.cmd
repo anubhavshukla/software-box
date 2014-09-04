@@ -1,11 +1,11 @@
-REM This script will install ANT application.
-REM Pre-requisites: 
-REM 1. 7-zip installation to directory specified in config.properties.
-REM Installation steps:
-REM 1. Copy zip archieve of ant from repository.
-REM 2. Unzip the archieve using 7-zip.
-REM 3. Remove archive.
-REM 4. Set ANT_HOME and add to PATH variable.
+:: This script will install ANT application.
+:: Pre-requisites: 
+:: 1. 7-zip installation to directory specified in config.properties.
+:: Installation steps:
+:: 1. Copy zip archieve of ant from repository.
+:: 2. Unzip the archieve using 7-zip.
+:: 3. Remove archive.
+:: 4. Set ANT_HOME and add to PATH variable.
 
 set APP_NAME=ANT
 set APP_FOLDER=%ANT_FOLDER%
