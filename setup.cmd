@@ -42,3 +42,9 @@ IF "%DOTNET45_REQUIRED%"=="Y" (
 	call ./components/dotnet.cmd
 	echo ------------------------------------------------------------------------
 )
+
+:: Installing Sourcetree GIT GUI.
+IF "%SOURCETREE_REQUIRED%"=="Y" (
+	call ./components/sourcetree.cmd
+	echo ------------------------------------------------------------------------
+)
